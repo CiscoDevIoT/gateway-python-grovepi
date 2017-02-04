@@ -1,0 +1,32 @@
+[
+  {
+    "type": "button",
+    "pin": 0,
+    "name": "RPi-Button 1",
+    "options": {}
+  },
+  {
+    "type": "sound",
+    "pin": 1,
+    "name": "RPi-Sound 1",
+    "options": {}
+  },
+  {
+    "type": "light",
+    "pin": 2,
+    "name": "RPi-Light 1",
+    "options": {}
+  },
+  {
+    "type": "buzzer",
+    "pin": 4,
+    "name": "RPi-Buzzer 1",
+    "options": {}
+  },
+  {
+    "type": "lcd",
+    "pin": 1,
+    "name": "RPi-Lcd 1",
+    "options": {}
+  }
+]
