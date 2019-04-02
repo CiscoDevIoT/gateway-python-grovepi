@@ -18,7 +18,7 @@ from cisco_grovepi.senor import Sensor
 
 class Rotary(Sensor):
     def __init__(self, tid, name, pin):
-        Sensor.__init__(self, tid, name, pin)
+        Sensor.__init__(self, tid, name, pin, "angle")
         self.add_property(Property(name="angle", unit="°", range=[0, 100]))
         self.angle = 0
 

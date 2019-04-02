@@ -17,7 +17,7 @@ from cisco_grovepi.senor import Sensor
 
 class Ranger(Sensor):
     def __init__(self, tid, name, pin):
-        Sensor.__init__(self, tid, name, pin)
+        Sensor.__init__(self, tid, name, pin, "distance")
         self.add_property(Property(name="distance", unit="cm"))
         self.distance = 0
 

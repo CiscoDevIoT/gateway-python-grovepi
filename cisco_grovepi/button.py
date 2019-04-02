@@ -17,7 +17,7 @@ from cisco_grovepi.senor import Sensor
 
 class Button(Sensor):
     def __init__(self, tid, name, pin):
-        Sensor.__init__(self, tid, name, pin)
+        Sensor.__init__(self, tid, name, pin, "button")
         self.add_property(Property("pressed", PropertyTypeBool))
         self.pressed = False
 

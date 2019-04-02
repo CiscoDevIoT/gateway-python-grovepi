@@ -17,7 +17,7 @@ from cisco_grovepi.senor import Sensor
 
 class Light(Sensor):
     def __init__(self, tid, name, pin):
-        Sensor.__init__(self, tid, name, pin)
+        Sensor.__init__(self, tid, name, pin, "light")
         self.add_property(Property(name="value", unit="Nit"))
         self.value = 0
 

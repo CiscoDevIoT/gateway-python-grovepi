@@ -18,7 +18,7 @@ from cisco_grovepi.senor import Sensor
 
 class Thermometer(Sensor):
     def __init__(self, tid, name, pin):
-        Sensor.__init__(self, tid, name, pin)
+        Sensor.__init__(self, tid, name, pin, "temperature")
         self.add_property(Property(name="temperature", unit="°C", range=[0, 100]))
         self.add_property(Property(name="humidity", unit="%", range=[0, 100]))
         self.temperature = 0

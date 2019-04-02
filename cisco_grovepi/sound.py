@@ -17,7 +17,7 @@ from cisco_grovepi.senor import Sensor
 
 class Sound(Sensor):
     def __init__(self, tid, name, pin):
-        Sensor.__init__(self, tid, name, pin)
+        Sensor.__init__(self, tid, name, pin, "sound")
         self.add_property(Property(name="volume", unit="dB"))
         self.volume = 0
 

@@ -19,7 +19,7 @@ from cisco_grovepi.senor import Sensor
 
 class Temperature(Sensor):
     def __init__(self, tid, name, pin):
-        Sensor.__init__(self, tid, name, pin)
+        Sensor.__init__(self, tid, name, pin, "temperature")
         self.add_property(Property(name="value", unit="°C", range=[0, 100]))
         self.value = 0
 

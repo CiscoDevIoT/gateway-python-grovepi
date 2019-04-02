@@ -22,7 +22,7 @@ class Buzzer(Sensor):
     OFF = 0
 
     def __init__(self, tid, name, pin):
-        Sensor.__init__(self, tid, name, pin)
+        Sensor.__init__(self, tid, name, pin, "buzzer")
         self.add_action(Action("turn_on"))
         self.add_action(Action("turn_off"))
         self.add_action(Action("beep").

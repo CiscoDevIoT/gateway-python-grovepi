@@ -18,7 +18,7 @@ from cisco_grovepi.senor import Sensor
 
 class Lcd(Sensor):
     def __init__(self, tid, name, pin):
-        Sensor.__init__(self, tid, name, pin)
+        Sensor.__init__(self, tid, name, pin, "lcd")
         self.add_action(Action("display", message=PropertyTypeString))
 
     def display(self, message):
