@@ -51,7 +51,7 @@ Your SD card now has what it needs to start using the GrovePi.
 &nbsp;
 ### Run GrovePi gateway service on Raspberry Pi
 
-#### 8. Install SDK and run code on Python 2 (on Raspberry Pi)
+#### 8. Install SDK and GrovePi gateway (on Raspberry Pi)
 * Download and install DevIoT python SDK.
 
         git clone https://wwwin-github.cisco.com/DevIoT/gateway-python-sdk.git
@@ -64,13 +64,31 @@ Your SD card now has what it needs to start using the GrovePi.
         git clone https://wwwin-github.cisco.com/DevIoT/gateway-python-grovepi.git
         cd gateway-python-grovepi
 
-* Modify sensors.json according to the types of sensors and the pin number.
+#### 9. Configure sensors.json and run the gateway service
 
-    You can use Text Editor in Raspberry Pi, or vim editor in the terminal window.
+* Configure sensors.json according to types and pin of connected sensors.
+
+    You can use Text Editor in Raspberry Pi, or Vim editor in the terminal window.
 
         vim sensors.json
 
     In Vim editor, you can only change the file in insert mode. Press 'i' and change the content. After modifying, press 'Esc' button and save the file and exit Vim editor by type ':wq' and press 'Enter'.
 
+In sensors.json, there is the information of each sensor inside the parenthesis {}.
+
+```
+{
+    "type": "light",
+    "pin": "A2",
+    "name": "GroveLight",
+    "options": {}
+}
+```
+
+  **type**: The name of a sensor class file. The python file having this name should be in cisco_grovepi.
+  **pin**: The pin which the sensor is connected to. It should be string like  "A1" or "D4", or pin number. You can check the details about it in [here](https://www.dexterindustries.com/GrovePi/engineering/port-description/).
+  **name**: The display name of sensor on DevIoT.
+
 * Run gateway service on Raspberry Pi.
+
         python main.py
