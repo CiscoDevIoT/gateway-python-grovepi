@@ -85,9 +85,9 @@ In sensors.json, there is the information of each sensor inside the parenthesis 
 }
 ```
 
-  **type**: The name of a sensor class file. The python file having this name should be in cisco_grovepi.
-  **pin**: The pin which the sensor is connected to. It should be string like  "A1" or "D4", or pin number. You can check the details about it in [here](https://www.dexterindustries.com/GrovePi/engineering/port-description/).
-  **name**: The display name of sensor on DevIoT.
+  1. **type**: The name of a sensor class file. The python file having this name should be in cisco_grovepi.
+  2. **pin**: The pin which the sensor is connected to. It should be string like  "A1" or "D4", or pin number. You can check the details about it in [here](https://www.dexterindustries.com/GrovePi/engineering/port-description/).
+  3. **name**: The display name of sensor on DevIoT.
 
 * Run gateway service on Raspberry Pi.
 

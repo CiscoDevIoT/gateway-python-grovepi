@@ -27,7 +27,7 @@ def class_for_name(mod_name, class_name):
         m = importlib.import_module(mod_name)
         c = getattr(m, class_name)
     except:
-        logger.warn("There is no sensor class called {{name}}".format(name=mod_name)) 
+        logger.warn("There is no sensor class called {name}".format(name=mod_name)) 
         return Sensor
     return c
 
@@ -44,7 +44,7 @@ def is_number(text):
     return True
 
 def pin_number(pin):
-    if isinstance(pin, str):
+    if isinstance(pin, unicode) or isinstance(pin, str):
         if is_number(pin):
             pin_value = int(pin)
         else:
@@ -80,7 +80,7 @@ if __name__ == '__main__':
         pin = pin_number(sensor["pin"])
         stype = sensor["type"]
         if pin is None:
-            logger.warn("The {{type}} {{name}} has the wrong pin number {{pin}}".format(type=stype, name=name, pin=sensor["pin"]))
+            logger.warn("The {type} {name} has the wrong pin number {pin}".format(type=stype, name=name, pin=sensor["pin"]))
             continue
         sid = stype.lower() + "_" + str(pin)
         klass = class_for_name("cisco_grovepi."+stype, stype.capitalize())
