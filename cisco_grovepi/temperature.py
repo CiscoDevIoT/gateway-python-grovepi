@@ -13,8 +13,8 @@
 
 
 import math
-from cisco_grovepi.senor import Sensor
 from cisco_deviot.thing import Property, PropertyType
+from cisco_grovepi.sensor import Sensor
 
 
 class Temperature(Sensor):

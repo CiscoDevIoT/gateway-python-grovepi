@@ -11,17 +11,16 @@
 # under the License.
 
 
-from cisco_deviot.thing import Property, PropertyTypeBool
-from cisco_grovepi.senor import Sensor
+from cisco_deviot.thing import Property, PropertyType
+from cisco_grovepi.sensor import Sensor
 
 
 class Button(Sensor):
     def __init__(self, tid, name, pin):
         Sensor.__init__(self, tid, name, pin, "button")
-        self.add_property(Property("pressed", PropertyTypeBool))
-        self.pressed = False
+        self.add_property(Property("pressed", PropertyType.BOOL))
 
     def update_state(self):
-        data = Sensor.analog_read(self)
+        data = Sensor.digital_read(self)
         if data is not None:
-            self.pressed = data > 0
+            self.update_property(pressed=(data>0))

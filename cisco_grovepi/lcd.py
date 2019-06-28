@@ -13,7 +13,7 @@
 
 from cisco_deviot.thing import Action, PropertyType
 from cisco_grovepi.helper.grove_rgb_lcd import setText
-from cisco_grovepi.senor import Sensor
+from cisco_grovepi.sensor import Sensor
 
 
 class Lcd(Sensor):

@@ -13,8 +13,8 @@
 
 import threading
 import time
-from cisco_grovepi.senor import Sensor
 from cisco_deviot.thing import Action, Property, PropertyType
+from cisco_grovepi.sensor import Sensor
 
 
 class Led(Sensor):
