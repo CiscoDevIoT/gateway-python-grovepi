@@ -44,7 +44,7 @@ def is_number(text):
     return True
 
 def pin_number(pin):
-    if isinstance(pin, unicode) or isinstance(pin, str):
+    if isinstance(pin, str):
         if is_number(pin):
             pin_value = int(pin)
         else:
