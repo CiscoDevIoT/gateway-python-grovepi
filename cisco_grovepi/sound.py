@@ -11,17 +11,16 @@
 # under the License.
 
 
-from cisco_deviot.thing import Property, PropertyTypeInt
 from cisco_grovepi.senor import Sensor
+from cisco_deviot.thing import Property, PropertyType
 
 
 class Sound(Sensor):
     def __init__(self, tid, name, pin):
         Sensor.__init__(self, tid, name, pin, "sound")
-        self.add_property(Property(name="volume", unit="dB"))
-        self.volume = 0
+        self.add_property(Property(name="volume", type=PropertyType.INT, value=0, unit="dB"))
 
     def update_state(self):
         data = Sensor.analog_read(self)
         if data is not None:
-            self.volume = data
+            self.update_property(volume=data)

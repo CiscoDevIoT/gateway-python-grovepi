@@ -11,7 +11,7 @@
 # under the License.
 
 
-from cisco_deviot.thing import Action, PropertyTypeString
+from cisco_deviot.thing import Action, PropertyType
 from cisco_grovepi.helper.grove_rgb_lcd import setText
 from cisco_grovepi.senor import Sensor
 
@@ -19,7 +19,7 @@ from cisco_grovepi.senor import Sensor
 class Lcd(Sensor):
     def __init__(self, tid, name, pin):
         Sensor.__init__(self, tid, name, pin, "lcd")
-        self.add_action(Action("display", message=PropertyTypeString))
+        self.add_action(Action("display", message=PropertyType.STRING))
 
     def display(self, message):
         setText(message)
