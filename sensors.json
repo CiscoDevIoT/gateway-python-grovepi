@@ -1,32 +1,32 @@
 [
   {
-    "type": "button",
-    "pin": 0,
-    "name": "RPi-Button 1",
-    "options": {}
-  },
-  {
-    "type": "sound",
-    "pin": 1,
-    "name": "RPi-Sound 1",
-    "options": {}
-  },
-  {
     "type": "light",
-    "pin": 2,
-    "name": "RPi-Light 1",
+    "pin": "A2",
+    "name": "GroveLight",
     "options": {}
   },
   {
-    "type": "buzzer",
-    "pin": 4,
-    "name": "RPi-Buzzer 1",
+    "type": "led",
+    "pin": "D3",
+    "name": "GroveLED",
     "options": {}
   },
   {
-    "type": "lcd",
-    "pin": 1,
-    "name": "RPi-Lcd 1",
+    "type": "ranger",
+    "pin": "D4",
+    "name": "GroveDistance",
+    "options": {}
+  },
+  {
+    "type": "thermometer",
+    "pin": "D7",
+    "name": "GroveTempHum",
+    "options": {}
+  },
+  {
+    "type": "button",
+    "pin": "D8",
+    "name": "GroveButton",
     "options": {}
   }
 ]

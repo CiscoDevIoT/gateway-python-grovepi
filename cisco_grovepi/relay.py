@@ -13,8 +13,8 @@
 
 import threading
 import time
-from cisco_deviot.thing import Action, Property, PropertyTypeInt
-from cisco_grovepi.senor import Sensor
+from cisco_deviot.thing import Action, Property, PropertyType
+from cisco_grovepi.sensor import Sensor
 
 
 class Relay(Sensor):
@@ -26,8 +26,8 @@ class Relay(Sensor):
         self.add_action(Action("turn_on"))
         self.add_action(Action("turn_off"))
         self.add_action(Action("flash").
-                        add_parameter(Property(name="duration", value=10, range=[10, 100])).
-                        add_parameter(Property(name="interval", value=1, range=[1, 10])))
+                        add_parameter(Property(name="duration", type=PropertyType.INT, value=10, range=[10, 100])).
+                        add_parameter(Property(name="interval", type=PropertyType.INT, value=1, range=[1, 10])))
         self.working_thread = None
 
     def turn_on(self):

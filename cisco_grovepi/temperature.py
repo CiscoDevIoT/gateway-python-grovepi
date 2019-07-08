@@ -13,18 +13,18 @@
 
 
 import math
-from cisco_deviot.thing import Property
-from cisco_grovepi.senor import Sensor
+from cisco_deviot.thing import Property, PropertyType
+from cisco_grovepi.sensor import Sensor
 
 
 class Temperature(Sensor):
     def __init__(self, tid, name, pin):
-        Sensor.__init__(self, tid, name, pin)
-        self.add_property(Property(name="value", unit="°C", range=[0, 100]))
-        self.value = 0
+        Sensor.__init__(self, tid, name, pin, "temperature")
+        self.add_property(Property(name="temperature", type=PropertyType.INT, value="0" unit="°C", range=[0, 100]))
 
     def update_state(self):
         data = Sensor.analog_read(self)
         if data is not None and data is not 0:
             resistance = (1023 - data) * 10000.0 / data
-            self.value = 1 / (math.log(resistance / 10000) / 4250 + 1 / 298.15) - 273.15 + 100
+            value = 1 / (math.log(resistance / 10000) / 4250 + 1 / 298.15) - 273.15 + 100
+            self.update_property(temperature=value)

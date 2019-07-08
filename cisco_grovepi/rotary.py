@@ -12,17 +12,16 @@
 # under the License.
 
 
-from cisco_deviot.thing import Property, PropertyTypeInt
-from cisco_grovepi.senor import Sensor
+from cisco_deviot.thing import Property, PropertyType
+from cisco_grovepi.sensor import Sensor
 
 
 class Rotary(Sensor):
     def __init__(self, tid, name, pin):
-        Sensor.__init__(self, tid, name, pin)
-        self.add_property(Property(name="angle", unit="°", range=[0, 100]))
-        self.angle = 0
+        Sensor.__init__(self, tid, name, pin, "angle")
+        self.add_property(Property(name="angle", type=PropertyType.INT, value=0, unit="°", range=[0, 100]))
 
     def update_state(self):
         data = Sensor.analog_read(self)
         if data is not None:
-            self.angle = data
+            self.update_property(angle = data)

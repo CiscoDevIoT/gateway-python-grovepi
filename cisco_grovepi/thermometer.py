@@ -12,20 +12,18 @@
 # under the License.
 
 
-from cisco_deviot.thing import Property, PropertyTypeInt
-from cisco_grovepi.senor import Sensor
+from cisco_deviot.thing import Property, PropertyType
+from cisco_grovepi.sensor import Sensor
 
 
 class Thermometer(Sensor):
     def __init__(self, tid, name, pin):
-        Sensor.__init__(self, tid, name, pin)
-        self.add_property(Property(name="temperature", unit="°C", range=[0, 100]))
-        self.add_property(Property(name="humidity", unit="%", range=[0, 100]))
-        self.temperature = 0
-        self.humidity = 0
+        Sensor.__init__(self, tid, name, pin, "temperature")
+        self.add_property(Property(name="temperature", type=PropertyType.INT, value=0, unit="°C", range=[0, 100]))
+        self.add_property(Property(name="humidity", type=PropertyType.INT, value=0, unit="%", range=[0, 100]))
 
     def update_state(self):
         data = Sensor.analog_read(self, "dht")
         if data is not None:
-            self.temperature = data[0]
-            self.humidity = data[1]
+            self.update_property(temperature=data[0], humidity=data[1])
+            

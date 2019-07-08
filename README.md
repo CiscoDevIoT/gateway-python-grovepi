@@ -1,7 +1,7 @@
 # gateway-python-grovepi
 Python-based gateway service for GrovePi.
 
-This code is based on [gateway-python-SDK](https://wwwin-github.cisco.com/DevIoT/gateway-python-sdk). You need to install SDK before using this repo. The way to install SDK is explained
+This code is based on [gateway-python-SDK](https://wwwin-github.cisco.com/DevIoT/gateway-python-sdk). You need to install SDK before using this repo. The way to install SDK will be explained in the instruction part.
 
 ### Prerequisite
 #### Hardware
@@ -9,49 +9,65 @@ This code is based on [gateway-python-SDK](https://wwwin-github.cisco.com/DevIoT
 * [GrovePi+ Starter Kit](http://www.dexterindustries.com/grovepi/)
 
 #### Software
-* [Python 2.7](https://www.python.org/downloads/): This SDK is based on the Python 2.7.3
+* [Python](https://www.python.org/downloads/): This SDK is based on Python 2 or 3.
 &nbsp;
 ## Run code on GrovePi (Raspberry Pi)
 ### Build the hardware
-#### 1. Prepare your Raspberry Pi os environment in your SD card
-* Download the OS for Raspberry Pi form [RASPBIAN JESSIE](https://www.raspberrypi.org/downloads/raspbian/)
-* Format you SD card
-* Use window install the OS image to the SD card. you can use [Win32 Disk Manager](https://sourceforge.net/projects/win32diskimager/).
-    I strongly recommend you do this using Windows, I have met many issues when i installed it by mac OS
-* Attach the SD card to the Raspberry Pi
+#### 1. Prepare your Raspberry Pi OS environment on your SD card
+* If your SD card is not Raspberry Pi preloaded, you need to install Raspberry Pi OS (Raspbian) in the SD card. There are two options to install Raspbian: (1) Install the OS image on the card (2) Install the installer (NOOBS). We recommend the second option, NOOBS. It is very easy. The only thing to do is extracting the installer file to the card.
+* You can download the latest OS image or the installer from [here](https://www.raspberrypi.org/downloads/).
+* But Raspberry OS is usually not stable right after its release. The new OS, buster is released on June 24, 2019. You can download the 'stretch' version of NOOBS from [here](http://downloads.raspberrypi.org/NOOBS/images/NOOBS-2019-04-09/).
 
-You also can follow [this instructions](https://www.raspberrypi.org/documentation/installation/noobs.md)
+* The SD card should be formatted as FAT32.
+* When you use Windows to install the OS image, you can use [Win32 Disk Manager](https://sourceforge.net/projects/win32diskimager/).
+* On macOS, you can use the 'Disk Utility' program to format. Choose the format MS-DOS (FAT).
+* Extract the zip file of NOOBS to the root directory of the SD card. **The files should be at the root directory.**
+* Insert the SD card to the Raspberry Pi
 
-#### 2. Connect the GrovePi to the Raspberry Pi
+You also can follow [this instruction](https://www.raspberrypi.org/documentation/installation/noobs.md).
 
-#### 3. Connect sensors to GrovePi
+#### 2. Connect your GrovePi board to the Raspberry Pi board
 
-#### 4. Connect Raspberry Pi with the power and network
+#### 3. Connect sensors to the GrovePi board
 
-#### 5. Connect Raspberry Pi with Display using HDMI cable
+#### 4. Connect Raspberry Pi with the power and network, screen.
 &nbsp;
 ### Build the software environment
-#### 6. Install the Python 2.7. 
-* Check the version of python that Raspberry Pi has. This sample code is based on python 2.7.3 or later. in most time, the Raspberry Pi os have installed the python 2.7.3 or later, if not, you can install the python follow [here](https://www.raspberrypi.org/documentation/linux/software/python.md).
+#### 5. Check if Raspberry Pi has Python. 
+* The Raspberry Pi OS has Python. If not, you can follow the [instruction](https://www.raspberrypi.org/documentation/linux/software/python.md).
 
-#### 7. Install GrovePi SDK.
+#### 6. Install GrovePi SDK.
 
-* Make sure your Raspberry Pi is connected to the Internet.
+* Make sure your Raspberry Pi is connected to the **Internet**.
 * Open Terminal.
-* Type the following commands in terminal window.
+* Type the following commands in the terminal window.
     
         sudo apt-get update
         sudo apt-get install rpi.gpio
     
-* [Follow the tutorial for setting up the GrovePi](http://www.dexterindustries.com/GrovePi/get-started-with-the-grovepi/setting-software/).
-* Reboot your Raspberry Pi board.
+* Set up the GrovePi software
+
+        curl -kL dexterindustries.com/update_grovepi | bash
+        sudo reboot
+
+Refer to the [tutorial](http://www.dexterindustries.com/GrovePi/get-started-with-the-grovepi/setting-software/).
+
+* flash the firmware
+        cd ~/Dexter/GrovePi/Firmware
+        bash firmware_update.sh
+
+* check the firmware version
+        cd ~/Dexter/GrovePi/Software/Python
+        python grove_firmware_version_check.py
+
+You can check the firmware version of 1.4.0 or higher.
     
 Your SD card now has what it needs to start using the GrovePi.
 [More information about installing GrovePi SDK](http://www.dexterindustries.com/GrovePi/get-started-with-the-grovepi/)
 &nbsp;
 ### Run GrovePi gateway service on Raspberry Pi
 
-#### 8. Install SDK and run code on Python 2 (on Raspberry Pi)
+#### 8. Install SDK and GrovePi gateway (on Raspberry Pi)
 * Download and install DevIoT python SDK.
 
         git clone https://wwwin-github.cisco.com/DevIoT/gateway-python-sdk.git
@@ -64,13 +80,32 @@ Your SD card now has what it needs to start using the GrovePi.
         git clone https://wwwin-github.cisco.com/DevIoT/gateway-python-grovepi.git
         cd gateway-python-grovepi
 
-* Modify sensors.json according to the types of sensors and the pin number.
+#### 9. Configure sensors.json and run the gateway service
 
-    You can use Text Editor in Raspberry Pi, or vim editor in the terminal window.
+* Configure sensors.json according to types and pin of connected sensors.
+
+    You can use Text Editor in Raspberry Pi, or Vim editor in the terminal window.
 
         vim sensors.json
 
     In Vim editor, you can only change the file in insert mode. Press 'i' and change the content. After modifying, press 'Esc' button and save the file and exit Vim editor by type ':wq' and press 'Enter'.
 
-* Run gateway service on Raspberry Pi.
-        python main.py
+In sensors.json, there is the information about each sensor inside the parenthesis {}.
+
+```
+{
+    "type": "light",
+    "pin": "A2",
+    "name": "GroveLight",
+    "options": {}
+}
+```
+
+  1. **type**: The name of a sensor class file. The python file having this name should be in cisco_grovepi.
+  2. **pin**: The pin which the sensor is connected to on the GrovePi board. It should be a string like  "A1" or "D4", or pin number. You can check the details about it in [here](https://www.dexterindustries.com/GrovePi/engineering/port-description/).
+  3. **name**: The display name of the sensor on DevIoT.
+  4. **options**: The parameter for setting additional values. It can be omitted, or left with {}. It is not necessary for pre-defined classes in cisco_grovepi directory. You can utilize this value when you define a new class.
+
+* Run gateway service on Raspberry Pi. Replace 'your_id@cisco.com' with your DevIoT account. 
+
+        python main.py --account your_id@cisco.com

@@ -11,17 +11,16 @@
 # under the License.
 
 
-from cisco_deviot.thing import Property
-from cisco_grovepi.senor import Sensor
+from cisco_deviot.thing import Property, PropertyType
+from cisco_grovepi.sensor import Sensor
 
 
 class Ranger(Sensor):
     def __init__(self, tid, name, pin):
-        Sensor.__init__(self, tid, name, pin)
-        self.add_property(Property(name="distance", unit="cm"))
-        self.distance = 0
+        Sensor.__init__(self, tid, name, pin, "distance")
+        self.add_property(Property(name="distance", type=PropertyType.INT, unit="cm"))
 
     def update_state(self):
         data = Sensor.analog_read(self, "ultrasonic")
         if data is not None:
-            self.distance = data
+            self.update_property(distance=data)

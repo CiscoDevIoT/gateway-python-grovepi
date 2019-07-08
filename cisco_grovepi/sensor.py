@@ -12,7 +12,7 @@
 
 
 from cisco_deviot.thing import Thing
-from grovepi import grovepi
+import grovepi
 
 
 class Sensor(Thing):
@@ -33,6 +33,12 @@ class Sensor(Thing):
             grovepi.analogWrite(self.pin, data)
         except IOError:
             pass
+
+    def digital_read(self):
+        try:
+            return grovepi.digitalRead(self.pin)
+        except IOError:
+            return None
 
     def analog_read(self, mode="analog"):
         try:
