@@ -61,11 +61,11 @@ def pin_number(pin):
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='gateway-python-starter-kit.')
-    parser.add_argument('--deviot-server', dest='deviot_server', required=True, type=str,
+    parser.add_argument('--deviot-server', dest='deviot_server', type=str, default='deviot.cisco.com',
                         help='url of deviot-server, eg: deviot.cisco.com')
-    parser.add_argument('--mqtt-server', dest='mqtt_server', required=True, type=str,
+    parser.add_argument('--mqtt-server', dest='mqtt_server', type=str, default='deviot.cisco.com:18883',
                         help='url of mqtt-server, eg: deviot.cisco.com:18883')
-    parser.add_argument('--account', dest="account", type=str)
+    parser.add_argument('--account', dest="account", type=str, default='')
     args = parser.parse_args()
 
     hostname = socket.gethostname()
