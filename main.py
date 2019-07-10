@@ -19,7 +19,7 @@ import traceback
 
 from cisco_deviot.gateway import Gateway
 from cisco_deviot import logger
-from cisco_grovepi.senor import Sensor
+from cisco_grovepi.sensor import Sensor
 
 
 def class_for_name(mod_name, class_name):
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     sensors = load_configs('sensors.json')
     for sensor in sensors:
         name = sensor["name"]
-        pin = pin_number(sensor["pin"])
+        pin = pin_number(str(sensor["pin"])) # temporary solution for python 2
         stype = sensor["type"]
         if pin is None:
             logger.warn("The {type} {name} has the wrong pin number {pin}".format(type=stype, name=name, pin=sensor["pin"]))
