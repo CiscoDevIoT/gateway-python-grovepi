@@ -10,6 +10,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+# The class for a button (Grove - Button)
 
 from cisco_deviot.thing import Property, PropertyType
 from cisco_grovepi.sensor import Sensor
