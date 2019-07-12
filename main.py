@@ -73,7 +73,6 @@ if __name__ == '__main__':
                       deviot_server=args.deviot_server,
                       connector_server=args.mqtt_server,
                       account=args.account)
-    instances = []
     sensors = load_configs('sensors.json')
     for sensor in sensors:
         name = sensor["name"]
@@ -87,14 +86,13 @@ if __name__ == '__main__':
         instance = klass(sid, name, pin)
         if "options" in sensor:
             instance.options = sensor["options"]
-        instances.append(instance)
         gateway.register(instance)
 
     gateway.start()
     while True:
         try:
             time.sleep(0.5)
-            for instance in instances:
+            for instance in gateway.things.values():
                 if getattr(instance, 'update_state', None):
                     instance.update_state()
         except:
