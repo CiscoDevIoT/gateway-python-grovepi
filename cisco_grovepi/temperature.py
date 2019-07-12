@@ -11,6 +11,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+# The class for a temperature sensor
 
 import math
 from cisco_deviot.thing import Property, PropertyType

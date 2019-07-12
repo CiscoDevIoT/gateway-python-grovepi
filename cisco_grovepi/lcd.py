@@ -10,6 +10,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+# The class for an LCD (Grove - LCD Display)
 
 from cisco_deviot.thing import Action, PropertyType
 from cisco_grovepi.helper.grove_rgb_lcd import setText

@@ -47,10 +47,10 @@ class Sensor(Thing):
                 if data > 1023:
                     return None
                 return data
-            elif mode == 'dht':
+            elif mode == 'dht': # a humidity and temperature sensor
                 temp, hum = grovepi.dht(self.pin, 0)
                 return temp, hum
-            elif mode == 'ultrasonic':
+            elif mode == 'ultrasonic': # an ultrasonic distance sensor
                 distance = grovepi.ultrasonicRead(self.pin)
                 return distance
         except IOError:

@@ -10,6 +10,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+# The class for a relay (Grove - Relay)
 
 import threading
 import time

@@ -19,7 +19,7 @@ import traceback
 
 from cisco_deviot.gateway import Gateway
 from cisco_deviot import logger
-from cisco_grovepi.senor import Sensor
+from cisco_grovepi.sensor import Sensor
 
 
 def class_for_name(mod_name, class_name):
@@ -73,11 +73,10 @@ if __name__ == '__main__':
                       deviot_server=args.deviot_server,
                       connector_server=args.mqtt_server,
                       account=args.account)
-    instances = []
     sensors = load_configs('sensors.json')
     for sensor in sensors:
         name = sensor["name"]
-        pin = pin_number(sensor["pin"])
+        pin = pin_number(str(sensor["pin"])) # str is the temporary solution for python 2
         stype = sensor["type"]
         if pin is None:
             logger.warn("The {type} {name} has the wrong pin number {pin}".format(type=stype, name=name, pin=sensor["pin"]))
@@ -87,14 +86,13 @@ if __name__ == '__main__':
         instance = klass(sid, name, pin)
         if "options" in sensor:
             instance.options = sensor["options"]
-        instances.append(instance)
         gateway.register(instance)
 
     gateway.start()
     while True:
         try:
             time.sleep(0.5)
-            for instance in instances:
+            for instance in gateway.things.values():
                 if getattr(instance, 'update_state', None):
                     instance.update_state()
         except:

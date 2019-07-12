@@ -10,6 +10,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+# The class for an LED (Grove - LED - any colors)
 
 import threading
 import time
